@@ -43,7 +43,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-2 col-lg-2 col-6">
                             <div class="logo">
-                                <a href="index.html">
+                                <a asp-action="Index" asp-controller="Home" >
                                     <img src="~/assets/images/logo/uniqlo.png" alt="logo">
                                 </a>
                             </div>
@@ -52,20 +52,20 @@
                         <div class="col-md-8 col-lg-8 d-none d-md-block">
                             <nav class="mainmenu__nav d-none d-lg-block">
                                 <ul class="main__menu">
-                                    <li><a href="/Home">Home</a></li>
+                                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                                     <li ><a href="shop.html">Shop</a></li>
-                                    <li><a href="/Home/About">About</a></li>
-                                    <li><a href="/Home/Contact">contact</a></li>
+                                    <li><a asp-action="About" asp-controller="Home">About</a></li>
+                                    <li><a asp-action="Contact" asp-controller="Home">contact</a></li>
                                 </ul>
                             </nav>
                             <div class="mobile-menu clearfix  d-block d-lg-none">
                                 <nav id="mobile_dropdown">
                                     <ul>
                                         li>
-                                        <a href="/Home">Home</a></li>
+                                        <a asp-action="Index" asp-controller="Home">Home</a></li>
                                         <li><a href="#">pages</a></li>
-                                        <li><a href="/Home/About">About</a></li>
-                                        <li><a href="/Home/Contact">contact</a></li>
+                                        <li><a asp-action="About" asp-controller="Home">About</a></li>
+                                        <li><a asp-action="Contact" asp-controller="Home">contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -217,9 +217,9 @@
                                 <p>© 2022 Uniqlo. Made with <i class="ti-heart"></i> by <a target="_blank" href="https://www.hasthemes.com">HasThemes.</a></p>
                             </div>
                             <ul class="footer__menu">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                                 <li><a href="shop.html">Product</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a asp-action="Contact" asp-controller="Home">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,5 +1,3 @@
-C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\bin\Debug\net8.0\appsettings.json
 C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\bin\Debug\net8.0\Uniqlol.exe
 C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\bin\Debug\net8.0\Uniqlol.deps.json
 C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\bin\Debug\net8.0\Uniqlol.runtimeconfig.json
@@ -670,3 +668,4 @@ C:\Users\User\Desktop\Uniqlol\Uniqlol\Uniqlol\obj\Debug\net8.0\refint\Uniqlol.dl
 C:\Users\User\Desktop\Uniqlol\Uniqlol\Uniqlol\obj\Debug\net8.0\Uniqlol.pdb
 C:\Users\User\Desktop\Uniqlol\Uniqlol\Uniqlol\obj\Debug\net8.0\Uniqlol.genruntimeconfig.cache
 C:\Users\User\Desktop\Uniqlol\Uniqlol\Uniqlol\obj\Debug\net8.0\ref\Uniqlol.dll
+C:\Users\User\Desktop\Uniqlo\Uniqlol\Uniqlol\obj\Debug\net8.0\Uniqlol.sourcelink.json

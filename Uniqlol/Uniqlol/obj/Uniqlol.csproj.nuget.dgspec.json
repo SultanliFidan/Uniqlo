@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\Uniqlol\\Uniqlol\\Uniqlol\\Uniqlol.csproj": {}
+    "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\Uniqlol.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\Uniqlol\\Uniqlol\\Uniqlol\\Uniqlol.csproj": {
+    "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\Uniqlol.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\Uniqlol\\Uniqlol\\Uniqlol\\Uniqlol.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\Uniqlol.csproj",
         "projectName": "Uniqlol",
-        "projectPath": "C:\\Users\\User\\Desktop\\Uniqlol\\Uniqlol\\Uniqlol\\Uniqlol.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\Uniqlol.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\Uniqlol\\Uniqlol\\Uniqlol\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
