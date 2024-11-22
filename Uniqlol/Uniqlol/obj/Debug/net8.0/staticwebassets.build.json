@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "d6aBrkPrMbDxL2x63KT2ab6Pxvq4nYEHWUlN8TvbVt0=",
+  "Hash": "J9r+eC0nvNNUu8Telu65p5Ug/eXTDmC4fMJFtWc2RNQ=",
   "Source": "Uniqlol",
   "BasePath": "_content/Uniqlol",
   "Mode": "Default",
@@ -37179,6 +37179,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\style.css"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\sdrstizo.msg.jpg",
+      "SourceId": "Uniqlol",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
+      "BasePath": "_content/Uniqlol",
+      "RelativePath": "imgs/sliders/sdrstizo.msg.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imgs\\sliders\\sdrstizo.msg.jpg"
     }
   ]
 }

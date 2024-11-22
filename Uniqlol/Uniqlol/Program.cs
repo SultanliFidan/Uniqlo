@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Uniqlol.DataAccess;
+
 namespace Uniqlol
 {
     public class Program
@@ -8,6 +12,10 @@ namespace Uniqlol
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<UniqloDbContext>(opt =>
+            {
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSql"));
+            });
 
             var app = builder.Build();
 
@@ -29,12 +37,14 @@ namespace Uniqlol
             //app.MapAreaControllerRoute("area", "Admin", "{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
+                name: "area",
+                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.MapControllerRoute(
-                name: "area",
-                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+            
 
             app.Run();
         }
