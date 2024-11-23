@@ -10,6 +10,7 @@
     <Folder Include="Views\Slider\" />
     <Folder Include="wwwroot\assets\" />
     <Folder Include="wwwroot\admin\" />
+    <Folder Include="wwwroot\imgs\products\" />
     <Folder Include="wwwroot\imgs\sliders\" />
   </ItemGroup>
 

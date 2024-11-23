@@ -7825,8 +7825,16 @@
       "PackagePath": "staticwebassets\\assets\\style.css"
     },
     {
-      "Id": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\sdrstizo.msg.jpg",
-      "PackagePath": "staticwebassets\\imgs\\sliders\\sdrstizo.msg.jpg"
+      "Id": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\dvrsn5bm.x1s.jpg",
+      "PackagePath": "staticwebassets\\imgs\\sliders\\dvrsn5bm.x1s.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\pqkcdnr2.ktu.webp",
+      "PackagePath": "staticwebassets\\imgs\\sliders\\pqkcdnr2.ktu.webp"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\wijtp0wu.0qn.jpg",
+      "PackagePath": "staticwebassets\\imgs\\sliders\\wijtp0wu.0qn.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Uniqlol.Microsoft.AspNetCore.StaticWebAssets.props",

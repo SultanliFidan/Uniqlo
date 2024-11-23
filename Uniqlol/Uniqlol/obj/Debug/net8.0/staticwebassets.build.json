@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "J9r+eC0nvNNUu8Telu65p5Ug/eXTDmC4fMJFtWc2RNQ=",
+  "Hash": "X4unNoJigshkK4vRGE3Zb3jczBNIZNSNI4t9GqzFPO0=",
   "Source": "Uniqlol",
   "BasePath": "_content/Uniqlol",
   "Mode": "Default",
@@ -37181,12 +37181,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\style.css"
     },
     {
-      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\sdrstizo.msg.jpg",
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\dvrsn5bm.x1s.jpg",
       "SourceId": "Uniqlol",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
       "BasePath": "_content/Uniqlol",
-      "RelativePath": "imgs/sliders/sdrstizo.msg.jpg",
+      "RelativePath": "imgs/sliders/dvrsn5bm.x1s.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -37197,7 +37197,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imgs\\sliders\\sdrstizo.msg.jpg"
+      "OriginalItemSpec": "wwwroot\\imgs\\sliders\\dvrsn5bm.x1s.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\pqkcdnr2.ktu.webp",
+      "SourceId": "Uniqlol",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
+      "BasePath": "_content/Uniqlol",
+      "RelativePath": "imgs/sliders/pqkcdnr2.ktu.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imgs\\sliders\\pqkcdnr2.ktu.webp"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\sliders\\wijtp0wu.0qn.jpg",
+      "SourceId": "Uniqlol",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
+      "BasePath": "_content/Uniqlol",
+      "RelativePath": "imgs/sliders/wijtp0wu.0qn.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imgs\\sliders\\wijtp0wu.0qn.jpg"
     }
   ]
 }

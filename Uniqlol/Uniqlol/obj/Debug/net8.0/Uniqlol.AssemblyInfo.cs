@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Uniqlol")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd31cc92ed80066d519f48ef02959d357aa29d83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48864e457791a5ca7a7a010400d66e3a8f912178")]
 [assembly: System.Reflection.AssemblyProductAttribute("Uniqlol")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Uniqlol")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
