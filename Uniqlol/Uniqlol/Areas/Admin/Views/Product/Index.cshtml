@@ -14,14 +14,14 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>CoverImage</th>
+                        <th>Image</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Quentity</th>
+                        <th>Brand</th>
+                        <th>Cost price</th>
+                        <th>Sell price</th>
                         <th>Discount</th>
-                        <th>SalePrice</th>
-                        <th>CostPrice</th>
-                        <th colspan="3">Action</th>
+                        <th>Stock count</th>
+                        <th colspan="2">Action</th>
                     </tr>
                 </thead>
 
@@ -32,10 +32,11 @@
                             <td>@item.Id</td>
                             <td><img src="~/imgs/products/@item.CoverImage" width="70" /></td>
                             <td>@item.Name</td>
-                            <td>@item.Description</td>
-                            <td>@item.Discount</td>
-                            <td>@item.SalePrice</td>
+                            <td>@item.Brand?.Name</td>
                             <td>@item.CostPrice</td>
+                            <td>@item.SalePrice</td>
+                            <td>@item.Discount</td>
+                            <td>@item.Quantity</td>
                             <td><a class="btn btn-success" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id">Dəyiş</a></td>
                             <td><a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Sil</a></td>
 

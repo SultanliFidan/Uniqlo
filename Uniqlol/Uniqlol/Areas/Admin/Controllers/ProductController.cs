@@ -13,7 +13,7 @@ namespace Uniqlol.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _context.Products.Include(x => x.Brand).ToListAsync());
         }
         public async Task<IActionResult> Create()
         {
@@ -31,6 +31,19 @@ namespace Uniqlol.Areas.Admin.Controllers
                 if (!vm.File.IsValidSize(400))
                     ModelState.AddModelError("File", "File must be less than 400kb");
             }
+            if (vm.OtherFiles.Any())
+            {
+                if (!vm.OtherFiles.All(x => x.IsValidType("image")))
+                {
+                    string fileNames = string.Join(',', vm.OtherFiles.Where(x => !x.IsValidType("image")).Select(x => x.FileName));
+                    ModelState.AddModelError("OtherFiles", fileNames + " is (are) not an image");
+                }
+                if (!vm.OtherFiles.All(x => x.IsValidSize(400)))
+                {
+                    string fileNames = string.Join(',', vm.OtherFiles.Where(x => !x.IsValidSize(400)).Select(x => x.FileName));
+                    ModelState.AddModelError("OtherFiles", fileNames + " is (are) bigger than 400kb");
+                }
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _context.Brands.Where(x => !x.IsDeleted).ToListAsync();
@@ -43,8 +56,13 @@ namespace Uniqlol.Areas.Admin.Controllers
                 return View();
 
             }
+            
             Product product = vm;
             product.CoverImage = await vm.File!.UploadAsync(_env.WebRootPath, "imgs", "products");
+             product.Images = vm.OtherFiles.Select(x => new ProductImage
+            {
+                ImageUrl = x.UploadAsync(_env.WebRootPath, "imgs", "products").Result 
+            }).ToList();
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -88,6 +106,19 @@ namespace Uniqlol.Areas.Admin.Controllers
                 if (!vm.File.IsValidSize(400))
                     ModelState.AddModelError("File", "File must be less than 400kb");
             }
+            if (vm.OtherFiles.Any())
+            {
+                if (!vm.OtherFiles.All(x => x.IsValidType("image")))
+                {
+                    string fileNames = string.Join(',', vm.OtherFiles.Where(x => !x.IsValidType("image")).Select(x => x.FileName));
+                    ModelState.AddModelError("OtherFiles", fileNames + " is (are) not an image");
+                }
+                if (!vm.OtherFiles.All(x => x.IsValidSize(400)))
+                {
+                    string fileNames = string.Join(',', vm.OtherFiles.Where(x => !x.IsValidSize(400)).Select(x => x.FileName));
+                    ModelState.AddModelError("OtherFiles", fileNames + " is (are) bigger than 400kb");
+                }
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = await _context.Brands.Where(x => !x.IsDeleted).ToListAsync();
@@ -109,7 +140,7 @@ namespace Uniqlol.Areas.Admin.Controllers
             entity.BrandId = vm.BrandId;
             entity.SalePrice = vm.SalePrice;
             entity.CostPrice = vm.CostPrice;
-            entity.CoverImage = vm.CoverImage;
+            
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

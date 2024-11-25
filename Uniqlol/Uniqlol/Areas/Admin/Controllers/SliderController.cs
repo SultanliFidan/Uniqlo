@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Uniqlol.DataAccess;
+using Uniqlol.Extensions;
 using Uniqlol.Models;
 using Uniqlol.ViewModels.Sliders;
 
@@ -111,16 +112,21 @@ namespace Uniqlol.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Slider data)
+        public async Task<IActionResult> Update(int id, SliderCreateVM vm)
         {
-            
 
+            if (vm.File != null)
+            {
+                if (!vm.File.IsValidType("image"))
+                    ModelState.AddModelError("File", "File must be an image");
+                if (!vm.File.IsValidSize(400))
+                    ModelState.AddModelError("File", "File must be less than 400kb");
+            }
             var entity = await _context.Sliders.FindAsync(id);
             if (entity is null) return NotFound();
-            entity.Title = data.Title;
-            entity.Subtitle = data.Subtitle;
-            entity.ImageUrl = data.ImageUrl;
-            entity.Link = data.Link;
+            entity.Title = vm.Title;
+            entity.Subtitle = vm.Subtitle;
+            entity.Link = vm.Link;
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
