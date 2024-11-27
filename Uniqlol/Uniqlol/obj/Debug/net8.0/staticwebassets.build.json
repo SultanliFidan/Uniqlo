@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dalKprdaWjz3WssMb/nMWYtaKGb1zgzSANAkQA4g5wc=",
+  "Hash": "5uEbmFpbbdf9eIPdtTFUwzZSCShlK9Zb/9bofOb1jIw=",
   "Source": "Uniqlol",
   "BasePath": "_content/Uniqlol",
   "Mode": "Default",
@@ -37257,6 +37257,25 @@
       "OriginalItemSpec": "wwwroot\\imgs\\products\\4zknl03y.sgv.webp"
     },
     {
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\products\\5nkijxjl.30e.jpg",
+      "SourceId": "Uniqlol",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
+      "BasePath": "_content/Uniqlol",
+      "RelativePath": "imgs/products/5nkijxjl.30e.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imgs\\products\\5nkijxjl.30e.jpg"
+    },
+    {
       "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\products\\alc3vami.o3f.jpg",
       "SourceId": "Uniqlol",
       "SourceType": "Discovered",
@@ -37407,6 +37426,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imgs\\products\\kuk05vgj.xf4.avif"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\products\\mau2ki44.spz.jpg",
+      "SourceId": "Uniqlol",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\",
+      "BasePath": "_content/Uniqlol",
+      "RelativePath": "imgs/products/mau2ki44.spz.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imgs\\products\\mau2ki44.spz.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Desktop\\Uniqlo\\Uniqlol\\Uniqlol\\wwwroot\\imgs\\products\\nnn55wzm.iqi.jpg",
