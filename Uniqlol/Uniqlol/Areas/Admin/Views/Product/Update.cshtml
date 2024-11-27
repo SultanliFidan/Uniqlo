@@ -1,6 +1,22 @@
-﻿@model Uniqlol.Models.Product
+﻿@model ProductUpdateVM
 @{
     ViewData["Title"] = "Update";
+}
+@section style {
+    <style>
+        .del-img-label {
+            position: relative;
+        }
+        .del-img-label:before{
+            content:'';
+            width:80px;
+            height:80px;
+            position:absolute;
+        }
+        .del-img-input:checked + .del-img-label:before{
+            background-color: rgba(0,0,0,0.3);
+        }
+    </style>
 }
 
 <div class="card shadow mb-4">
@@ -8,7 +24,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Product create</h6>
     </div>
     <div class="card-body">
-        <form enctype="multipart/form-data" method="post">
+        <form id="islepls" enctype="multipart/form-data" method="post">
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <input class="form-control" asp-for="Name">
@@ -16,36 +32,63 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
-                <input class="form-control" asp-for="Description">
+                <textarea class="form-control" asp-for="Description"></textarea>
                 <span class="text-danger" asp-validation-for="Description"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Quantity"></label>
-                <input class="form-control" asp-for="Quantity">
-                <span class="text-danger" asp-validation-for="Quantity"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SalePrice"></label>
-                <input class="form-control" asp-for="SalePrice">
-                <span class="text-danger" asp-validation-for="SalePrice"></span>
+                <div class="d-flex">
+                    <img width="80px" src="~/imgs/products/@Model.FileUrl" />
+                </div>
+                <label asp-for="File">Cover image</label>
+                <input accept="image/*" class="form-control" asp-for="File">
+                <span class="text-danger" asp-validation-for="File"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CostPrice"></label>
-                <input class="form-control" asp-for="CostPrice">
-                <span class="text-danger" asp-validation-for="CostPrice"></span>
+                <form asp-action="DeleteImgs" asp-controller="Product" method="post" class="d-flex" style="gap:10px">
+                    @foreach (var item in Model.OtherFilesUrls ?? [])
+                    {
+                        <input class="d-none del-img-input" type="checkbox" value="@item" name="imgNames" id="@item" />
+                        <label class="del-img-label" for="@item"><img width="80px" src="~/imgs/products/@item" /></label>
+                    }
+                    <button asp-action="DeleteImgs" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-danger">Delete</button>
+                </form>
+                <br />
+                <label asp-for="OtherFiles">Other images</label>
+                <input accept="image/*" class="form-control" asp-for="OtherFiles">
+                <span class="text-danger" asp-validation-for="OtherFiles"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="BrandId"></label>
-                <input class="form-control" asp-for="BrandId">
-                <span class="text-danger" asp-validation-for="BrandId"></span>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="CostPrice"></label>
+                    <input class="form-control" asp-for="CostPrice">
+                    <span class="text-danger" asp-validation-for="CostPrice"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="SalePrice"></label>
+                    <input class="form-control" asp-for="SalePrice">
+                    <span class="text-danger" asp-validation-for="SalePrice"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Discount"></label>
+                    <input class="form-control" asp-for="Discount">
+                    <span class="text-danger" asp-validation-for="Discount"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.CoverImage"></label>
-                <input class="form-control" asp-for="@Model.CoverImage">
-                <span class="text-danger" asp-validation-for="@Model.CoverImage"></span>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Quantity"></label>
+                    <input class="form-control" asp-for="Quantity">
+                    <span class="text-danger" asp-validation-for="Quantity"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="BrandId">Brands</label>
+                    <select class="form-control" asp-for="BrandId" asp-items='new SelectList(ViewBag.Categories,"Id","Name")'>
+                        <option disabled selected>Select brand</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="BrandId"></span>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button onclick="$('#islepls').submit()" type="submit" class="btn btn-primary my-2">Submit</button>
         </form>
     </div>
-</div>
+</div></div>
