@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Text.Json;
 using Uniqlol.DataAccess;
+using Uniqlol.ViewModels.Basket;
 using Uniqlol.ViewModels.Brands;
 using Uniqlol.ViewModels.Products;
 using Uniqlol.ViewModels.Shops;
@@ -40,6 +43,51 @@ namespace Uniqlol.Controllers
             }).ToListAsync();
             vm.ProductCount = query.Count();
             return View(vm);
+        }
+
+        public async Task<IActionResult> AddBasket(int id)
+        {
+            var basket = getBasket();
+            var item = basket.FirstOrDefault(x => x.Id == id);
+            if (item != null)
+            {
+                item.Count++;
+            }
+            else
+            {
+                basket.Add(new BasketCookieItemVM
+                {
+                    Id = id,
+                    Count = 1
+                });
+            }
+                
+           
+            string data = JsonSerializer.Serialize(basket);
+            HttpContext.Response.Cookies.Append("basket", data);
+            return Ok();
+        }
+
+        public async Task<IActionResult> GetBasket(int id)
+        {
+
+            return Json(getBasket());
+        }
+        List<BasketCookieItemVM> getBasket()
+        {
+            try
+            {
+                string? value = HttpContext.Request.Cookies["basket"];
+                if (value is null)
+                {
+                    return new();
+                }
+                return JsonSerializer.Deserialize<List<BasketCookieItemVM>>(value) ?? new();
+            }
+            catch
+            {
+                return new();
+            }
         }
     }
 }

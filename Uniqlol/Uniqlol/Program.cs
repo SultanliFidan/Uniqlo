@@ -16,6 +16,7 @@ namespace Uniqlol
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSql"));
             });
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -32,7 +33,9 @@ namespace Uniqlol
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+
+            app.UseSession();
 
             //app.MapAreaControllerRoute("area", "Admin", "{controller=Home}/{action=Index}/{id?}");
 
