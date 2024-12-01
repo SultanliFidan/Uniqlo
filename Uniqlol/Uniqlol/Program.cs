@@ -16,6 +16,9 @@ namespace Uniqlol
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSql"));
             });
+
+
+            
             builder.Services.AddSession();
 
             var app = builder.Build();

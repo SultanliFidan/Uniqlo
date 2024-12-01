@@ -1,4 +1,4 @@
-﻿namespace Uniqlol.ViewModels.Basket
+﻿namespace Uniqlol.ViewModels.Baskets
 {
     public class BasketCookieItemVM
     {

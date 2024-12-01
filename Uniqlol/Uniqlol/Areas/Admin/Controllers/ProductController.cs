@@ -111,5 +111,26 @@ namespace Uniqlol.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Update), new { id });
         }
+
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            string filePath = Path.Combine(_env.WebRootPath, "imgs", "products", product.CoverImage);
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

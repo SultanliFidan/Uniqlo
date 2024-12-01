@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Text.Json;
 using Uniqlol.DataAccess;
-using Uniqlol.ViewModels.Basket;
+using Uniqlol.ViewModels.Baskets;
 using Uniqlol.ViewModels.Brands;
 using Uniqlol.ViewModels.Products;
 using Uniqlol.ViewModels.Shops;
@@ -73,6 +73,16 @@ namespace Uniqlol.Controllers
 
             return Json(getBasket());
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var basket = getBasket();
+            var item = basket.FirstOrDefault(x => x.Id == id);
+            basket.Remove(item);
+            string data = JsonSerializer.Serialize(basket);
+            HttpContext.Response.Cookies.Append("basket", data);
+            return RedirectToAction(nameof(Index));
+        }
         List<BasketCookieItemVM> getBasket()
         {
             try
@@ -89,5 +99,9 @@ namespace Uniqlol.Controllers
                 return new();
             }
         }
+
+
+
+
     }
 }
