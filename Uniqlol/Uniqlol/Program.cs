@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Uniqlol.DataAccess;
+using Uniqlol.Models;
 
 namespace Uniqlol
 {
@@ -18,7 +20,16 @@ namespace Uniqlol
             });
 
 
-            
+            builder.Services.AddIdentity<User, IdentityRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireDigit = true;
+                opt.Password.RequireLowercase = true;
+                opt.Password.RequireUppercase = true;
+                opt.Lockout.MaxFailedAccessAttempts = 3;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<UniqloDbContext>();
             builder.Services.AddSession();
 
             var app = builder.Build();
