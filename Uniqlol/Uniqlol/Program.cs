@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Uniqlol.DataAccess;
+using Uniqlol.Extensions;
 using Uniqlol.Models;
 
 namespace Uniqlol
@@ -22,15 +24,22 @@ namespace Uniqlol
 
             builder.Services.AddIdentity<User, IdentityRole>(opt =>
             {
-                opt.User.RequireUniqueEmail = true;
-                opt.Password.RequiredLength = 8;
-                opt.Password.RequireDigit = true;
-                opt.Password.RequireLowercase = true;
-                opt.Password.RequireUppercase = true;
+                opt.User.RequireUniqueEmail = false;
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
                 opt.Lockout.MaxFailedAccessAttempts = 3;
+                
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<UniqloDbContext>();
-            builder.Services.AddSession();
+            //builder.Services.AddSession();
+            builder.Services.ConfigureApplicationCookie(x =>
+            {
+                x.LoginPath = "/login";
+                x.AccessDeniedPath = "/Home/AccessDenied";
+            });
 
             var app = builder.Build();
 
@@ -46,13 +55,27 @@ namespace Uniqlol
             app.UseStaticFiles();
 
             app.UseRouting();
+            
 
-            //app.UseAuthorization();
-
-            app.UseSession();
+            app.UseAuthorization();
+            app.UseUserSeed();
+            //app.UseSession();
 
             //app.MapAreaControllerRoute("area", "Admin", "{controller=Home}/{action=Index}/{id?}");
-
+            app.MapControllerRoute(
+                name: "login",
+                pattern: "login", new
+                {
+                    Controller = "Account",
+                    Action = "Login"
+                });
+            app.MapControllerRoute(
+               name: "register",
+               pattern: "register", new
+               {
+                   Controller = "Account",
+                   Action = "Register"
+               });
             app.MapControllerRoute(
                 name: "area",
                 pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Uniqlol.Areas.Admin.Controllers
 {
@@ -6,6 +7,7 @@ namespace Uniqlol.Areas.Admin.Controllers
     {
 
         [Area("Admin")]
+        [Authorize]
         public IActionResult Index()
         {
             return View();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Uniqlol.DataAccess;
 using Uniqlol.Models;
@@ -7,6 +8,7 @@ using Uniqlol.ViewModels.Brands;
 namespace Uniqlol.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BrandController(UniqloDbContext _context) : Controller
     {
         public async Task<IActionResult> Index()

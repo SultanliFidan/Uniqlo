@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging;
 using Uniqlol.DataAccess;
@@ -9,6 +10,7 @@ using Uniqlol.ViewModels.Products;
 namespace Uniqlol.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProductController(IWebHostEnvironment _env, UniqloDbContext _context) : Controller
     {
         public async Task<IActionResult> Index()

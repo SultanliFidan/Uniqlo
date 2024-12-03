@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Uniqlol.ViewModels.Sliders;
 namespace Uniqlol.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class SliderController(UniqloDbContext _context, IWebHostEnvironment _env) : Controller
     {
         public async Task<IActionResult> Index()
