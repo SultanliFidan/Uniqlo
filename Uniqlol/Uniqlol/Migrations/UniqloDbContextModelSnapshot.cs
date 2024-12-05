@@ -228,6 +228,33 @@ namespace Uniqlol.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Uniqlol.Models.ProductComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductComments");
+                });
+
             modelBuilder.Entity("Uniqlol.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +281,32 @@ namespace Uniqlol.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("Uniqlol.Models.ProductRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingRate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductRatings");
                 });
 
             modelBuilder.Entity("Uniqlol.Models.Slider", b =>
@@ -427,6 +480,21 @@ namespace Uniqlol.Migrations
                     b.Navigation("Brand");
                 });
 
+            modelBuilder.Entity("Uniqlol.Models.ProductComment", b =>
+                {
+                    b.HasOne("Uniqlol.Models.Product", "Product")
+                        .WithMany("ProductComments")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Uniqlol.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Uniqlol.Models.ProductImage", b =>
                 {
                     b.HasOne("Uniqlol.Models.Product", "Product")
@@ -438,6 +506,21 @@ namespace Uniqlol.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Uniqlol.Models.ProductRating", b =>
+                {
+                    b.HasOne("Uniqlol.Models.Product", "Product")
+                        .WithMany("ProductRatings")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Uniqlol.Models.User", "User")
+                        .WithMany("ProductRatings")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Uniqlol.Models.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -446,6 +529,15 @@ namespace Uniqlol.Migrations
             modelBuilder.Entity("Uniqlol.Models.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("ProductComments");
+
+                    b.Navigation("ProductRatings");
+                });
+
+            modelBuilder.Entity("Uniqlol.Models.User", b =>
+                {
+                    b.Navigation("ProductRatings");
                 });
 #pragma warning restore 612, 618
         }

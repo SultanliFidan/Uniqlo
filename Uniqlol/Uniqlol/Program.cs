@@ -34,7 +34,7 @@ namespace Uniqlol
                 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<UniqloDbContext>();
-            //builder.Services.AddSession();
+            builder.Services.AddSession();
             builder.Services.ConfigureApplicationCookie(x =>
             {
                 x.LoginPath = "/login";
@@ -59,7 +59,7 @@ namespace Uniqlol
 
             app.UseAuthorization();
             app.UseUserSeed();
-            //app.UseSession();
+            app.UseSession();
 
             //app.MapAreaControllerRoute("area", "Admin", "{controller=Home}/{action=Index}/{id?}");
             app.MapControllerRoute(

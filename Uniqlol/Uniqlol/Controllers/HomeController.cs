@@ -16,7 +16,7 @@ namespace Uniqlol.Controllers
         public async Task<IActionResult> Index()
         {
             HomeVM vm = new();
-            vm.Sliders = await _context.Sliders.Select(x => new SliderListItemVM
+            vm.Sliders = await _context.Sliders.Where(x => !x.IsDeleted).Select(x => new SliderListItemVM
             {
                 ImageUrl = x.ImageUrl,
                 Link = x.Link,
@@ -41,6 +41,11 @@ namespace Uniqlol.Controllers
         }
 
         public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult AccessDenied()
         {
             return View();
         }

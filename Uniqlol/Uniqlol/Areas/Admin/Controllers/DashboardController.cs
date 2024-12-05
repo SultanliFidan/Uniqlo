@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Uniqlol.Enums;
 
 namespace Uniqlol.Areas.Admin.Controllers
 {
@@ -7,7 +8,7 @@ namespace Uniqlol.Areas.Admin.Controllers
     {
 
         [Area("Admin")]
-        [Authorize]
+        [Authorize(Roles = nameof(Roles.Admin))]
         public IActionResult Index()
         {
             return View();

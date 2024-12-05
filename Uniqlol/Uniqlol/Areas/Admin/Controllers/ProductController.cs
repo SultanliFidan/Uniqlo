@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging;
 using Uniqlol.DataAccess;
 using Uniqlol.Extensions;
+using Uniqlol.Helpers;
 using Uniqlol.Models;
 using Uniqlol.ViewModels.Products;
 
 namespace Uniqlol.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = RoleConstants.Product)]
     public class ProductController(IWebHostEnvironment _env, UniqloDbContext _context) : Controller
     {
         public async Task<IActionResult> Index()
@@ -93,13 +94,23 @@ namespace Uniqlol.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int? id, ProductUpdateVM vm)
         {
-            var data = await _context.Products.Include(x => x.Images)
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
-            data.Images.AddRange(vm.OtherFiles.Select(x => new ProductImage
+            Product? product = await _context.Products.Include(x => x.Images).Where(x => x.Id == id).FirstOrDefaultAsync();
+            if(product is null) return NotFound();
+
+            if(vm.OtherFiles is not null)
             {
-                ImageUrl = x.UploadAsync(_env.WebRootPath, "imgs", "products").Result
-            }).ToList());
+				product.Images.AddRange(vm.OtherFiles.Select(x => new ProductImage
+				{
+					ImageUrl = x.UploadAsync(_env.WebRootPath, "imgs", "products").Result
+				}).ToList());
+			}
+            product.Name = vm.Name;
+            product.Description = vm.Description;
+            product.CostPrice = vm.CostPrice;
+            product.SalePrice = vm.SalePrice;
+            product.Discount = vm.Discount;
+            product.Quantity = vm.Quantity;
+           
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

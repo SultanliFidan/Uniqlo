@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Uniqlol.Enums;
 using Uniqlol.Extensions;
@@ -10,14 +11,17 @@ namespace Uniqlol.Controllers
 {
     public class AccountController(UserManager<User> _userManager,SignInManager<User> _signInManager,RoleManager<IdentityRole> _roleManager) : Controller
     {
+        private bool isAuthenticated => HttpContext.User.Identity?.IsAuthenticated ?? false;
         public IActionResult Register()
         {
+            if(isAuthenticated) return RedirectToAction("Index","Home");
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM vm)
         {
-            if(!ModelState.IsValid)
+            if (isAuthenticated) return RedirectToAction("Index", "Home");
+            if (!ModelState.IsValid)
             {
                 return View();
             }
@@ -49,23 +53,25 @@ namespace Uniqlol.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Method()
-        {
-            foreach (Roles item in Enum.GetValues(typeof(Roles)))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(item.GetRole()));   
-            }
-            return Ok();
-        }
+        //public async Task<IActionResult> Method()
+        //{
+        //    foreach (Roles item in Enum.GetValues(typeof(Roles)))
+        //    {
+        //        await _roleManager.CreateAsync(new IdentityRole(item.GetRole()));   
+        //    }
+        //    return Ok();
+        //}
 
         public IActionResult Login()
         {
+            if (isAuthenticated) return RedirectToAction("Index", "Home");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM vm,string? returnUrl = null)
         {
+            if (isAuthenticated) return RedirectToAction("Index", "Home");
             if (!ModelState.IsValid) return View();
             User? user = null;
             if(vm.UsernameOrEmail.Contains("@"))
@@ -91,10 +97,22 @@ namespace Uniqlol.Controllers
                 return View();
             }
             if(string.IsNullOrEmpty(returnUrl))
+            {
+                if(await _userManager.IsInRoleAsync(user,"Admin"))
+                {
+                    return RedirectToAction("Index", new {Controller = "Dashboard", Area = "Admin"});
+                }
                 return RedirectToAction("Index","Home");
+            }
             return LocalRedirect(returnUrl);
                 
             
+        }
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
         }
     }
 }
