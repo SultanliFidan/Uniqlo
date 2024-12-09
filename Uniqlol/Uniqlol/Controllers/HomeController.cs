@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Mail;
 using Uniqlol.DataAccess;
 using Uniqlol.ViewModels.Commons;
 using Uniqlol.ViewModels.Products;
@@ -13,6 +15,7 @@ namespace Uniqlol.Controllers
     public class HomeController(UniqloDbContext _context) : Controller
     {
 
+        
         public async Task<IActionResult> Index()
         {
             HomeVM vm = new();

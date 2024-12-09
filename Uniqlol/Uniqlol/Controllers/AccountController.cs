@@ -1,16 +1,39 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 using Uniqlol.Enums;
 using Uniqlol.Extensions;
 using Uniqlol.Models;
 using Uniqlol.ViewModels.Auths;
 using Uniqlol.ViewModels.Authsl;
+using Uniqlol.Services.Abstracts;
+using System.Text;
 
 namespace Uniqlol.Controllers
 {
-    public class AccountController(UserManager<User> _userManager,SignInManager<User> _signInManager,RoleManager<IdentityRole> _roleManager) : Controller
+    public class AccountController(UserManager<User> _userManager,SignInManager<User> _signInManager,RoleManager<IdentityRole> _roleManager,IEmailService _service) : Controller
     {
+
+        public IActionResult Send()
+        {
+            //SmtpClient client = new SmtpClient();
+            //client.Host = "smtp.gmail.com";
+            //client.Port = 587;
+            //client.EnableSsl = true;
+            //client.UseDefaultCredentials = false;
+            //client.Credentials = new NetworkCredential("fidanrs-ab108@code.edu.az", "tdqj itqg rqvx jdnt");
+            //MailAddress from = new MailAddress("fidanrs-ab108@code.edu.az", "Uniqlo");
+            //MailAddress to = new MailAddress("fidansultanli325@gmail.com");
+            //MailMessage message = new MailMessage(from, to);
+            //message.Subject = "Qiymetlendirme";
+            //message.Body = "<p>Salammmmm, imtahan neticen <a href='https://www.youtube.com/watch?v=3S88KB4Mkjw'> linkdedir</a>.</p>";
+            //message.IsBodyHtml = true;
+            //client.Send(message);
+            //_service.SendAsync().Wait();
+            return Ok();
+        }
         private bool isAuthenticated => HttpContext.User.Identity?.IsAuthenticated ?? false;
         public IActionResult Register()
         {
@@ -49,8 +72,9 @@ namespace Uniqlol.Controllers
                 }
                 return View();
             }
-
-            return View();
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            _service.SendEmailConfirmation(user.Email, user.UserName, token);
+            return Content("Email sent!");
         }
 
         //public async Task<IActionResult> Method()
@@ -113,6 +137,24 @@ namespace Uniqlol.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
+        }
+        public async Task<IActionResult> VerifyEmail(string token, string user)
+        {
+            var entity = await _userManager.FindByNameAsync(user);
+            if (entity is null) return BadRequest();
+            var result = await _userManager.ConfirmEmailAsync(entity, token.Replace(' ', '+'));
+            if (!result.Succeeded)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in result.Errors)
+                {
+                    sb.AppendLine(item.Description);
+                }
+                return Content(sb.ToString());
+            }
+            await _signInManager.SignInAsync(entity, true);
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

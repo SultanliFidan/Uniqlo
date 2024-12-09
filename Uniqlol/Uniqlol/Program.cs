@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Uniqlol.DataAccess;
 using Uniqlol.Extensions;
+using Uniqlol.Helpers;
 using Uniqlol.Models;
+using Uniqlol.Services.Abstracts;
+using Uniqlol.Services.Implemets;
 
 namespace Uniqlol
 {
@@ -34,6 +38,10 @@ namespace Uniqlol
                 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(10);
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<UniqloDbContext>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            var opt = new SmtpOptions();
+            builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection(SmtpOptions.Name));
+
             builder.Services.AddSession();
             builder.Services.ConfigureApplicationCookie(x =>
             {
