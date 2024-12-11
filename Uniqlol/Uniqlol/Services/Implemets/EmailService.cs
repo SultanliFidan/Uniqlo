@@ -32,6 +32,16 @@ namespace Uniqlol.Services.Implemets
             msg.Body = EmailTemplates.VerifyEmail.Replace("__$name", name).Replace("__$link", url);
             _client.Send(msg);
         }
+        public void ResetPassword(string reciever,string name,string token)
+        {
+            MailAddress to = new(reciever);
+            MailMessage msg = new MailMessage(_from, to);
+            msg.IsBodyHtml = true;
+            msg.Subject = "Reset password";
+            string url = Context.Request.Scheme + "://" + Context.Request.Host + "/Account/ResetPassword?token=" + token + "&user=" + name;
+           
+            _client.Send(msg);
+        }
     }
 
 

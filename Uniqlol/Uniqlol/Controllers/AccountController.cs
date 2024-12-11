@@ -154,7 +154,31 @@ namespace Uniqlol.Controllers
             }
             await _signInManager.SignInAsync(entity, true);
             return RedirectToAction("Index", "Home");
+        }
 
+        public IActionResult Reset()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Reset(ResetVM vm,string email)
+        {
+            if (!ModelState.IsValid) return View(vm);
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+            {
+                ModelState.AddModelError("Email", "");
+                return View();
+            }
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+             _service.ResetPassword(user.Email, user.UserName,token);
+            return Content("Email send");
+        }
+
+        public IActionResult NewPassword()
+        {
+            return View();
         }
     }
 }
