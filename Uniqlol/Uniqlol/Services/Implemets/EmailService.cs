@@ -39,7 +39,7 @@ namespace Uniqlol.Services.Implemets
             msg.IsBodyHtml = true;
             msg.Subject = "Reset password";
             string url = Context.Request.Scheme + "://" + Context.Request.Host + "/Account/ResetPassword?token=" + token + "&user=" + name;
-           
+            msg.Body = EmailTemplates.ResetPassword.Replace("__$name", name).Replace("__$link", url);
             _client.Send(msg);
         }
     }

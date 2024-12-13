@@ -176,9 +176,30 @@ namespace Uniqlol.Controllers
             return Content("Email send");
         }
 
-        public IActionResult NewPassword()
+        public IActionResult ResetPassword(string token,string email)
         {
-            return View();
+            var password =  new NewPasswordVM { Token = token, Email = email };
+            return View(password);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(NewPasswordVM vm)
+        {
+            if (!ModelState.IsValid) return View(vm);
+            var user = await _userManager.FindByEmailAsync(vm.Email);
+            if (user is null) return BadRequest();
+            var data = await _userManager.ResetPasswordAsync(user, vm.Token.Replace(' ', '+'),vm.NewPassword);
+            if(!data.Succeeded)
+            {
+                foreach (var error in data.Errors)
+                {
+                    ModelState.AddModelError("",error.Description);
+                }
+                return View(vm);
+            }
+
+            return RedirectToAction("Login", "Account");
+            
+
         }
     }
 }
