@@ -7,6 +7,7 @@ using Uniqlol.DataAccess;
 using Uniqlol.Enums;
 using Uniqlol.Extensions;
 using Uniqlol.Models;
+using Uniqlol.ViewModels.Commons;
 using Uniqlol.ViewModels.Sliders;
 
 namespace Uniqlol.Areas.Admin.Controllers
@@ -15,12 +16,14 @@ namespace Uniqlol.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Roles.Admin))]
     public class SliderController(UniqloDbContext _context, IWebHostEnvironment _env) : Controller
     {
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page = 1, int? take = 1)
         {
-            return View(await _context.Sliders.ToListAsync());
+           // return View(await _context.Sliders.ToListAsync());
+            ViewBag.Pagination = new PaginationItemsVM(await _context.Sliders.CountAsync(),take.Value,page.Value);
+            return View(await _context.Sliders.Skip((page.Value - 1) * take.Value).Take(take.Value).ToListAsync());
         }
 
-       
+
         public IActionResult Create()
         {
             return View();

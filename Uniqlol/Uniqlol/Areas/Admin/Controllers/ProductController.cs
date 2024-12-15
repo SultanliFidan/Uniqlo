@@ -6,6 +6,7 @@ using Uniqlol.DataAccess;
 using Uniqlol.Extensions;
 using Uniqlol.Helpers;
 using Uniqlol.Models;
+using Uniqlol.ViewModels.Commons;
 using Uniqlol.ViewModels.Products;
 
 namespace Uniqlol.Areas.Admin.Controllers;
@@ -14,9 +15,14 @@ namespace Uniqlol.Areas.Admin.Controllers;
 [Authorize(Roles = RoleConstants.Product)]
 public class ProductController(IWebHostEnvironment _env, UniqloDbContext _context) : Controller
 {
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? page = 1,int? take = 1)
     {
-        return View(await _context.Products.Include(x => x.Brand).ToListAsync());
+        if (!page.HasValue) page = 1;
+        if (!take.HasValue) take = 1;
+        var query = _context.Products.Include(x => x.Brand).AsQueryable();
+        var data = await query.Skip(take.Value * (page.Value - 1)).Take(take.Value).ToListAsync();
+        ViewBag.PaginationItems = new PaginationItemsVM(await query.CountAsync(), take.Value, page.Value);
+        return View(data);
     }
     public async Task<IActionResult> Create()
     {
