@@ -131,10 +131,12 @@ public class ProductController(IWebHostEnvironment _env, UniqloDbContext _contex
         return RedirectToAction(nameof(Update), new { id });
     }
 
-    
+
     public async Task<IActionResult> Delete(int id)
     {
-        Product product = await _context.Products.FindAsync(id);
+        Product product = await _context.Products
+             .Include(p => p.ProductComments).Include(p => p.ProductRatings)
+             .FirstOrDefaultAsync(p => p.Id == id);
         if (product == null)
         {
             return NotFound();
@@ -146,6 +148,9 @@ public class ProductController(IWebHostEnvironment _env, UniqloDbContext _contex
             System.IO.File.Delete(filePath);
         }
 
+        _context.Products.Remove(product);
+        _context.ProductRatings.RemoveRange(product.ProductRatings);
+        _context.ProductComments.RemoveRange(product.ProductComments);
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
