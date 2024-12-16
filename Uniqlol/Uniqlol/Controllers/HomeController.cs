@@ -29,7 +29,7 @@ namespace Uniqlol.Controllers
             vm.Brands = await _context.Brands.OrderByDescending(x => x.Products!.Count).Take(4).ToListAsync();
             
             vm.PopularProducts = await _context.Products
-                .Where(x => vm.Brands.Select(y => y.Id).Contains(x.BrandId.Value)).Take(4)
+                .Where(x => vm.Brands.Select(y => y.Id).Contains(x.BrandId.Value))
                 .Select(x => new ProductListItemVM
             {
                 CoverImage = x.CoverImage,
